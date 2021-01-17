@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SwipeVideos</string>
+    <string name="playlist_url">https://www.dropbox.com/s/fd4zf3ejsojnj2w/playlist.json?dl=1</string>
+    <string name="loading">Loading...</string>
 </resources>
