@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.lentimosystems.swipevideos.VideosAdapter.VideoViewHolder
 import com.lentimosystems.swipevideos.databinding.ItemVideosContainerBinding
 
-class VideosAdapter(private val videoItems: List<VideoItem>) : Adapter<VideoViewHolder>() {
+class VideosAdapter : Adapter<VideoViewHolder>() {
+    private val videoItems = mutableListOf<VideoItem>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemVideosContainerBinding.inflate(inflater, parent, false)
@@ -24,11 +26,17 @@ class VideosAdapter(private val videoItems: List<VideoItem>) : Adapter<VideoView
         return videoItems.size
     }
 
+    fun loadVideos(videos: List<VideoItem>) {
+        videoItems.clear()
+        videoItems.addAll(videos)
+        notifyDataSetChanged()
+    }
+
     class VideoViewHolder(private var binding: ItemVideosContainerBinding) : ViewHolder(binding.root) {
         fun setVideoData(videoItem: VideoItem) {
-            binding.txtTitle.text = videoItem.videoTitle
-            binding.txtDesc.text = videoItem.videoDesc
-            binding.videoView.setVideoPath(videoItem.videoURL)
+            binding.txtTitle.text = videoItem.title
+            binding.txtDesc.text = videoItem.description
+            binding.videoView.setVideoPath(videoItem.url)
             binding.videoView.setOnPreparedListener { mp ->
                 binding.progressBar.visibility = View.GONE
                 mp.start()
