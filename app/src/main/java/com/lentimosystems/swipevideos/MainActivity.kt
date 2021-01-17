@@ -2,17 +2,18 @@ package com.lentimosystems.swipevideos
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
 
-import com.lentimosystems.swipevideos.R.id
-import com.lentimosystems.swipevideos.R.layout
+import com.lentimosystems.swipevideos.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(layout.activity_main)
-        val videosViewPager = findViewById<ViewPager2>(id.viewPagerVideos)
-        videosViewPager.adapter = VideosAdapter(listOf(
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.viewPagerVideos.adapter = VideosAdapter(listOf(
                 VideoItem(
                         videoURL = "https://liciolentimo.co.ke/img/videos/facebook.mp4",
                         videoTitle = "Women In Tech",
